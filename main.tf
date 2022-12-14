@@ -315,8 +315,7 @@ resource "aws_launch_configuration" "lc" {
 }
 
 module "tags" {
-  source  = "snowplow-devops/tags/aws"
-  version = "0.1.1"
+  source  = "https://github.com/smartx-net/terraform-aws-tags.git?ref=provider-tags"
 
   tags = local.tags
 }
