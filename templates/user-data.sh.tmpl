@@ -40,7 +40,7 @@ sudo docker run \
   --log-opt max-file=5 \
 %{ endif ~}
   -v $${CONFIG_DIR}:/snowplow/config \
-  -e 'JAVA_OPTS=-Dorg.slf4j.simpleLogger.defaultLogLevel=info' \
+  -e 'JAVA_OPTS=-Dorg.slf4j.simpleLogger.defaultLogLevel=info ${java_opts}' \
   snowplow/snowplow-s3-loader:${version} \
   --config /snowplow/config/s3_loader.hocon
 
