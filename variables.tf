@@ -160,6 +160,12 @@ variable "time_limit_ms" {
   type        = number
 }
 
+variable "java_opts" {
+  description = "Custom Java Options"
+  default     = ""
+  type        = string
+}
+
 # --- Telemetry
 
 variable "telemetry_enabled" {
