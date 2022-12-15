@@ -21,6 +21,8 @@ locals {
   s3_object_prefix = trimsuffix(var.s3_object_prefix, "/")
 
   cloudwatch_log_group_name = "/aws/ec2/${var.name}"
+
+  extra_iam_policy = var.extra_iam_policy
 }
 
 data "aws_region" "current" {}
@@ -208,6 +210,12 @@ EOF
 resource "aws_iam_role_policy_attachment" "policy_attachment" {
   role       = aws_iam_role.iam_role.name
   policy_arn = aws_iam_policy.iam_policy.arn
+}
+
+resource "aws_iam_role_policy_attachment" "extra_policy_attachment" {
+  for_each = local.extra_iam_policy
+  role       = aws_iam_role.iam_role.name
+  policy_arn = each.value
 }
 
 resource "aws_iam_instance_profile" "instance_profile" {
